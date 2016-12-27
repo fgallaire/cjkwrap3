@@ -4,37 +4,12 @@ Copyright (C) 2015-2016, Florent Gallaire <fgallaire@gmail.com>
 Copyright (C) 1999-2001, Gregory P. Ward <gward@python.net>
 Copyright (C) 2002-2003, Python Software Foundation
 
-Python2 will stay broken forever:
-<https://bugs.python.org/issue24665>
-
 Originally developed for txt2tags <http://txt2tags.org>
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-
-__version__ = '2.2'
 
 import textwrap
 import unicodedata
 import sys
-
-PY3 = sys.version[0] == '3'
-
-if PY3:
-    text_type = str
-else:
-    text_type = unicode
 
 
 def is_wide(char):
@@ -51,7 +26,7 @@ def cjklen(text):
     
     Return the real width of an unicode text, the len of any other type.
     """
-    if not isinstance(text, text_type):
+    if not isinstance(text, str):
         return len(text)
     return sum(2 if is_wide(char) else 1 for char in text)
 
@@ -61,10 +36,10 @@ def cjkslices(text, index):
     
     Return the two slices of a text cut to the index.
     """
-    if not isinstance(text, text_type):
+    if not isinstance(text, str):
         return text[:index], text[index:]
     if cjklen(text) <= index:
-        return text, u''
+        return text, ''
     i = 1
     # <= and i-1 to catch the last double length char of odd line
     while cjklen(text[:i]) <= index:
