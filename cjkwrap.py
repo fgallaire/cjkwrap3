@@ -9,7 +9,6 @@ Originally developed for txt2tags <http://txt2tags.org>
 
 import textwrap
 import unicodedata
-import sys
 
 
 def is_wide(char):
