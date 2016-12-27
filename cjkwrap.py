@@ -46,11 +46,6 @@ def cjkslices(text, index):
         i = i + 1
     return text[:i-1], text[i-1:]
 
-def head(text, index):
-    return cjkslices(text, index)[0]
-
-def tail(text, index):
-    return cjkslices(text, index)[1]
 
 class CJKWrapper(textwrap.TextWrapper):
     """CJK fix for the Greg Ward textwrap lib."""
